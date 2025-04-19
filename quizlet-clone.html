@@ -136,7 +136,7 @@
             min-height: 44px;
         }
         
-        /* Hero Section - Fixed Version */
+        /* Hero Section */
         .hero {
             padding: 40px 0;
             background-color: white;
@@ -259,7 +259,7 @@
             word-break: break-word;
         }
         
-        /* Flashcards Section */
+        /* Flashcards Section - Improved Mobile Responsiveness */
         .flashcards {
             padding: 50px 0;
             background-color: white;
@@ -287,12 +287,13 @@
         }
         
         .flashcard-container {
-            width: 100%;
+            width: 90%;
+            max-width: 500px;
+            height: 0;
+            padding-bottom: 60%;
             margin: 0 auto;
             position: relative;
-            height: 300px;
             perspective: 1000px;
-            padding: 0 15px;
         }
         
         .flashcard {
@@ -302,15 +303,15 @@
             transform-style: preserve-3d;
             transition: transform 0.6s;
             cursor: pointer;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
         .flashcard.flipped {
             transform: rotateY(180deg);
         }
         
-        .flashcard-front, .flashcard-back {
+        .flashcard-face {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -319,49 +320,51 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            border-radius: 12px;
+            box-sizing: border-box;
+            border-radius: 15px;
             text-align: center;
             word-break: break-word;
-            overflow: hidden;
+            overflow-wrap: break-word;
         }
         
         .flashcard-front {
             background-color: #4255ff;
             color: white;
-            font-size: 1.5rem;
             font-weight: 600;
         }
         
         .flashcard-back {
-            background-color: #f2f3f7;
+            background-color: #f6f7fb;
             color: #303545;
             transform: rotateY(180deg);
-            font-size: 1.3rem;
         }
         
-        .flashcard-navigation {
-            margin-top: 25px;
+        .flashcard-content {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            padding: 10px;
+            width: 100%;
+        }
+        
+        .flashcard-controls {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            padding: 0 15px;
+            margin-top: 20px;
+            gap: 15px;
         }
         
         .flashcard-nav-btn {
-            background-color: #f2f3f7;
-            border: none;
-            width: 44px;
-            height: 44px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: #f6f7fb;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin: 0 10px;
-            color: #586380;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
         
         .flashcard-nav-btn:hover {
@@ -372,9 +375,8 @@
         .flashcard-counter {
             font-size: 1rem;
             color: #586380;
-            margin: 0 10px;
         }
-        
+
         /* Theme Customization Section */
         .theme-customization {
             padding: 50px 0;
@@ -459,11 +461,12 @@
         
         .preview-flashcard {
             width: 100%;
-            height: 250px;
+            max-width: 500px;
+            height: 0;
+            padding-bottom: 60%;
             margin: 0 auto;
             position: relative;
             perspective: 1000px;
-            padding: 0 15px;
         }
         
         /* Search Section */
@@ -807,6 +810,15 @@
             .feature-card {
                 padding: 20px;
             }
+            
+            /* Tablet flashcard adjustments */
+            .flashcard-container {
+                padding-bottom: 50%;
+            }
+            
+            .flashcard-content {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+            }
         }
 
         /* Responsive Design for Desktop */
@@ -874,17 +886,6 @@
                 padding: 0;
             }
             
-            .flashcard-container {
-                height: 400px;
-                padding: 0;
-            }
-            
-            .flashcard-front, 
-            .flashcard-back {
-                font-size: 2rem;
-                padding: 40px;
-            }
-            
             .theme-controls {
                 padding: 32px;
             }
@@ -923,6 +924,16 @@
             .nav-links li {
                 margin: 0 0 0 24px;
             }
+            
+            /* Desktop flashcard adjustments */
+            .flashcard-container {
+                max-width: 600px;
+                padding-bottom: 40%;
+            }
+            
+            .flashcard-content {
+                font-size: 2rem;
+            }
         }
 
         /* Mobile Navigation */
@@ -951,7 +962,6 @@
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
                 z-index: 999;
             }
-            /* // */
             
             .nav-links.active {
                 display: flex;
@@ -969,6 +979,20 @@
             
             .auth-buttons {
                 margin-left: auto;
+            }
+            
+            /* Mobile-specific flashcard adjustments */
+            .flashcard-container {
+                padding-bottom: 80%;
+            }
+            
+            .flashcard-content {
+                font-size: clamp(1rem, 4.5vw, 1.5rem);
+            }
+            
+            .flashcard-nav-btn {
+                width: 45px;
+                height: 45px;
             }
         }
     </style>
@@ -999,7 +1023,7 @@
         </div>
     </header>
 
-    <!-- Hero Section - Fixed Version -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -1048,7 +1072,7 @@
         </div>
     </section>
 
-    <!-- Flashcards Section -->
+    <!-- Flashcards Section - Improved Mobile Version -->
     <section class="flashcards">
         <div class="container">
             <div class="flashcards-heading">
@@ -1057,15 +1081,19 @@
             </div>
             <div class="flashcard-container">
                 <div class="flashcard" id="current-card">
-                    <div class="flashcard-front">
-                        What is the capital of France?
+                    <div class="flashcard-face flashcard-front">
+                        <div class="flashcard-content" id="front-content">
+                            What is the capital of France?
+                        </div>
                     </div>
-                    <div class="flashcard-back">
-                        Paris
+                    <div class="flashcard-face flashcard-back">
+                        <div class="flashcard-content" id="back-content">
+                            Paris
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="flashcard-navigation">
+            <div class="flashcard-controls">
                 <button class="flashcard-nav-btn" id="prev-btn">
                     <i class="fas fa-chevron-left"></i>
                 </button>
@@ -1137,11 +1165,11 @@
             </div>
             <div class="preview-flashcard">
                 <div class="flashcard" id="preview-card">
-                    <div class="flashcard-front" id="preview-front">
-                        Preview Front
+                    <div class="flashcard-face flashcard-front" id="preview-front">
+                        <div class="flashcard-content">Sample Question</div>
                     </div>
-                    <div class="flashcard-back" id="preview-back">
-                        Preview Back
+                    <div class="flashcard-face flashcard-back" id="preview-back">
+                        <div class="flashcard-content">Sample Answer</div>
                     </div>
                 </div>
             </div>
@@ -1263,7 +1291,7 @@
             { front: "What planet is known as the Red Planet?", back: "Mars" },
             { front: "What is the chemical symbol for gold?", back: "Au" },
             { front: "Who wrote 'Romeo and Juliet'?", back: "William Shakespeare" },
-            { front: "What is the largest mammal?", back: "Blue Whale" }
+            { front: "What is the largest mammal on Earth?", back: "Blue Whale" }
         ];
 
         // Mobile navigation toggle
@@ -1283,6 +1311,8 @@
 
         // Flashcard functionality
         const card = document.getElementById('current-card');
+        const frontContent = document.getElementById('front-content');
+        const backContent = document.getElementById('back-content');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const currentCardNum = document.getElementById('current-card-num');
@@ -1291,8 +1321,44 @@
         let currentIndex = 0;
         totalCards.textContent = flashcards.length;
         
-        // Set initial card content
-        updateCardContent();
+        // Update card content with responsive text sizing
+        function updateCard() {
+            frontContent.textContent = flashcards[currentIndex].front;
+            backContent.textContent = flashcards[currentIndex].back;
+            currentCardNum.textContent = currentIndex + 1;
+            adjustFontSize();
+        }
+        
+        // Adjust font size based on content length and screen size
+        function adjustFontSize() {
+            const frontLength = flashcards[currentIndex].front.length;
+            const backLength = flashcards[currentIndex].back.length;
+            const maxLength = Math.max(frontLength, backLength);
+            
+            if (window.innerWidth <= 768) { // Mobile devices
+                if (maxLength > 60) {
+                    frontContent.style.fontSize = 'clamp(0.9rem, 3vw, 1.2rem)';
+                    backContent.style.fontSize = 'clamp(0.9rem, 3vw, 1.2rem)';
+                } else if (maxLength > 30) {
+                    frontContent.style.fontSize = 'clamp(1rem, 3.5vw, 1.5rem)';
+                    backContent.style.fontSize = 'clamp(1rem, 3.5vw, 1.5rem)';
+                } else {
+                    frontContent.style.fontSize = '';
+                    backContent.style.fontSize = '';
+                }
+            } else { // Larger screens
+                if (maxLength > 100) {
+                    frontContent.style.fontSize = '1.5rem';
+                    backContent.style.fontSize = '1.5rem';
+                } else if (maxLength > 50) {
+                    frontContent.style.fontSize = '1.8rem';
+                    backContent.style.fontSize = '1.8rem';
+                } else {
+                    frontContent.style.fontSize = '';
+                    backContent.style.fontSize = '';
+                }
+            }
+        }
         
         // Toggle card flip on click
         card.addEventListener('click', () => {
@@ -1305,7 +1371,7 @@
             if (currentIndex > 0) {
                 currentIndex--;
                 card.classList.remove('flipped');
-                updateCardContent();
+                updateCard();
             }
         });
         
@@ -1315,20 +1381,10 @@
             if (currentIndex < flashcards.length - 1) {
                 currentIndex++;
                 card.classList.remove('flipped');
-                updateCardContent();
+                updateCard();
             }
         });
         
-        // Update card content based on current index
-        function updateCardContent() {
-            const cardFront = card.querySelector('.flashcard-front');
-            const cardBack = card.querySelector('.flashcard-back');
-            
-            cardFront.textContent = flashcards[currentIndex].front;
-            cardBack.textContent = flashcards[currentIndex].back;
-            currentCardNum.textContent = currentIndex + 1;
-        }
-
         // Theme customization
         const frontColorOptions = document.querySelectorAll('#front-colors .color-option');
         const backColorOptions = document.querySelectorAll('#back-colors .color-option');
@@ -1343,12 +1399,9 @@
         // Front color selection
         frontColorOptions.forEach(option => {
             option.addEventListener('click', () => {
-                // Remove selected class from all options
                 frontColorOptions.forEach(opt => opt.classList.remove('selected'));
-                // Add selected class to clicked option
                 option.classList.add('selected');
                 
-                // Apply color to preview card front
                 const color = option.getAttribute('data-color');
                 previewFront.style.backgroundColor = color;
                 document.querySelectorAll('.flashcard-front').forEach(front => {
@@ -1360,12 +1413,9 @@
         // Back color selection
         backColorOptions.forEach(option => {
             option.addEventListener('click', () => {
-                // Remove selected class from all options
                 backColorOptions.forEach(opt => opt.classList.remove('selected'));
-                // Add selected class to clicked option
                 option.classList.add('selected');
                 
-                // Apply color to preview card back
                 const color = option.getAttribute('data-color');
                 previewBack.style.backgroundColor = color;
                 document.querySelectorAll('.flashcard-back').forEach(back => {
@@ -1377,12 +1427,9 @@
         // Pattern selection
         patternOptions.forEach(option => {
             option.addEventListener('click', () => {
-                // Remove selected class from all options
                 patternOptions.forEach(opt => opt.classList.remove('selected'));
-                // Add selected class to clicked option
                 option.classList.add('selected');
                 
-                // Apply pattern to preview card
                 const pattern = option.getAttribute('data-pattern');
                 if (pattern === 'none') {
                     previewFront.style.backgroundImage = 'none';
@@ -1403,16 +1450,13 @@
         // Font selection
         fontOptions.forEach(option => {
             option.addEventListener('click', () => {
-                // Remove selected class from all options
                 fontOptions.forEach(opt => opt.classList.remove('selected'));
-                // Add selected class to clicked option
                 option.classList.add('selected');
                 
-                // Apply font to preview card
                 const font = option.getAttribute('data-font');
                 previewFront.style.fontFamily = font;
                 previewBack.style.fontFamily = font;
-                document.querySelectorAll('.flashcard-front, .flashcard-back').forEach(el => {
+                document.querySelectorAll('.flashcard-content').forEach(el => {
                     el.style.fontFamily = font;
                 });
             });
@@ -1421,20 +1465,15 @@
         // Animation selection
         animationOptions.forEach(option => {
             option.addEventListener('click', () => {
-                // Remove selected class from all options
                 animationOptions.forEach(opt => opt.classList.remove('selected'));
-                // Add selected class to clicked option
                 option.classList.add('selected');
                 
-                // Apply animation
                 const animation = option.getAttribute('data-animation');
                 const allCards = document.querySelectorAll('.flashcard');
                 
-                // Remove all animation classes first
                 allCards.forEach(card => {
                     card.classList.remove('fade-in', 'slide-in', 'bounce-in');
                     
-                    // Reset transition for default animation
                     if (animation === 'default') {
                         card.style.transition = 'transform 0.6s';
                     } else {
@@ -1443,7 +1482,7 @@
                     }
                 });
                 
-                // Demo the animation on preview card
+                // Demo the animation
                 previewCard.classList.remove('flipped');
                 setTimeout(() => {
                     previewCard.classList.add('flipped');
@@ -1456,9 +1495,40 @@
             previewCard.classList.toggle('flipped');
         });
         
-        // Initialize preview card content
-        previewFront.textContent = "Sample Question";
-        previewBack.textContent = "Sample Answer";
+        // Touch events for swipe navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        card.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        card.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false); 
+        
+        function handleSwipe() {
+            const threshold = 50; // Minimum swipe distance
+            
+            if (touchEndX < touchStartX - threshold) {
+                // Swipe left - next card
+                if (currentIndex < flashcards.length - 1) {
+                    currentIndex++;
+                    card.classList.remove('flipped');
+                    updateCard();
+                }
+            }
+            
+            if (touchEndX > touchStartX + threshold) {
+                // Swipe right - previous card
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    card.classList.remove('flipped');
+                    updateCard();
+                }
+            }
+        }
         
         // Search functionality
         const searchInput = document.querySelector('.search-input');
@@ -1469,60 +1539,17 @@
             
             // Simple search simulation
             if (query.length > 2) {
-                // Show search results
                 searchResults.style.display = 'grid';
             } else {
-                // Hide search results if query is too short
                 searchResults.style.display = 'grid';
             }
         });
 
-        // Touch event handlers for mobile swipe gestures
-        card.addEventListener('touchstart', handleTouchStart, false);        
-        card.addEventListener('touchmove', handleTouchMove, false);
-
-        let xDown = null;                                                        
-        let yDown = null;
-
-        function handleTouchStart(evt) {                                         
-            xDown = evt.touches[0].clientX;                                      
-            yDown = evt.touches[0].clientY;                                      
-        };                                                
-
-        function handleTouchMove(evt) {
-            if (!xDown || !yDown) {
-                return;
-            }
-
-            let xUp = evt.touches[0].clientX;                                    
-            let yUp = evt.touches[0].clientY;
-
-            let xDiff = xDown - xUp;
-            let yDiff = yDown - yUp;
-
-            // Horizontal swipe detection
-            if (Math.abs(xDiff) > Math.abs(yDiff)) {
-                if (xDiff > 0) {
-                    // Left swipe - next card
-                    if (currentIndex < flashcards.length - 1) {
-                        currentIndex++;
-                        card.classList.remove('flipped');
-                        updateCardContent();
-                    }
-                } else {
-                    // Right swipe - previous card
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        card.classList.remove('flipped');
-                        updateCardContent();
-                    }
-                }                       
-            }
-
-            // Reset values
-            xDown = null;
-            yDown = null;                                             
-        };
+        // Initialize
+        updateCard();
+        
+        // Handle window resize
+        window.addEventListener('resize', adjustFontSize);
     </script>
 </body>
 </html>
