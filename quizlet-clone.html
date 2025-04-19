@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizlet - Learning tools & flashcards, for free</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #303545;
+            line-height: 1.5;
+            background-color: #f6f7fb;
+        }
+        
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background-color: #4255ff;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a4cd7;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #4255ff;
+            border: 1px solid #4255ff;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(66, 85, 255, 0.05);
+        }
+        
+        /* Header */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        
+        .logo {
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 24px;
+        }
+        
+        .nav-links a {
+            color: #586380;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #4255ff;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-buttons a {
+            margin-left: 16px;
+        }
+        
+        /* Mobile Nav Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #586380;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-text {
+            width: 50%;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #303545;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #586380;
+            margin-bottom: 32px;
+        }
+        
+        .hero-image {
+            width: 45%;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: #f6f7fb;
+        }
+        
+        .features-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .features-heading h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #303545;
+            margin-bottom: 16px;
+        }
+        
+        .features-heading p {
+            font-size: 1.1rem;
+            color: #586380;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 32px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            padding: 32px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 24px;
+            color: #4255ff;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #303545;
+        }
+        
+        .feature-card p {
+            color: #586380;
+            font-size: 0.95rem;
+        }
+        
+        /* Flashcards Section */
+        .flashcards {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .flashcards-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .flashcards-heading h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #303545;
+            margin-bottom: 16px;
+        }
+        
+        .flashcards-heading p {
+            font-size: 1.1rem;
+            color: #586380;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .flashcard-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 400px;
+            perspective: 1000px;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .flashcard-front {
+            background-color: #4255ff;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .flashcard-back {
+            background-color: #f2f3f7;
+            color: #303545;
+            transform: rotateY(180deg);
+            font-size: 1.8rem;
+        }
+        
+        .flashcard-navigation {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .flashcard-nav-btn {
+            background-color: #f2f3f7;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 0 16px;
+            color: #586380;
+            transition: all 0.2s ease;
+        }
+        
+        .flashcard-nav-btn:hover {
+            background-color: #e3e5ed;
+            color: #4255ff;
+        }
+        
+        .flashcard-counter {
+            font-size: 1rem;
+            color: #586380;
+            margin: 0 16px;
+        }
+        
+        /* Theme Customization Section (New Feature) */
+        .theme-customization {
+            padding: 80px 0;
+            background-color: #f6f7fb;
+        }
+        
+        .theme-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .theme-heading h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #303545;
+            margin-bottom: 16px;
+        }
+        
+        .theme-heading p {
+            font-size: 1.1rem;
+            color: #586380;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .theme-controls {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 32px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .control-group {
+            margin-bottom: 24px;
+        }
+        
+        .control-group h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #303545;
+        }
+        
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            border: 2px solid transparent;
+            transition: transform 0.2s;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
+            border-color: #303545;
+        }
+        
+        .color-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .preview-flashcard {
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        /* Search Section */
+        .search-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .search-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .search-heading h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #303545;
+            margin-bottom: 16px;
+        }
+        
+        .search-heading p {
+            font-size: 1.1rem;
+            color: #586380;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-bar {
+            display: flex;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 16px;
+            padding-left: 52px;
+            border: 2px solid #e3e5ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #303545;
+            transition: border-color 0.2s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #4255ff;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #586380;
+            font-size: 1.2rem;
+        }
+        
+        .search-results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 24px;
+        }
+        
+        .search-result {
+            background-color: #f6f7fb;
+            border-radius: 8px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .search-result:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-result h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #303545;
+            margin-bottom: 8px;
+        }
+        
+        .search-result p {
+            color: #586380;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        
+        .search-result-meta {
+            display: flex;
+            align-items: center;
+            color: #8a93a6;
+            font-size: 0.8rem;
+        }
+        
+        .search-result-meta span {
+            display: flex;
+            align-items: center;
+            margin-right: 16px;
+        }
+        
+        .search-result-meta i {
+            margin-right: 6px;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #303545;
+            color: white;
+            padding: 60px 0 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 40px;
+        }
+        
+        .footer-logo {
+            grid-column: 1 / -1;
+            margin-bottom: 32px;
+        }
+        
+        .footer-logo svg {
+            height: 40px;
+            fill: white;
+        }
+        
+        .footer-column h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e3e5ed;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #b0b7c5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #b0b7c5;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .social-links a {
+            color: #b0b7c5;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+        
+        .social-links a:hover {
+            color: white;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                position: relative;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 12px 0;
+                width: 100%;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text, .hero-image {
+                width: 100%;
+            }
+            
+            .hero-text {
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-results {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        /* Advanced Theme Customization - NEW FEATURE */
+        .bg-patterns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .pattern-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .pattern-option:hover {
+            transform: scale(1.05);
+        }
+        
+        .pattern-option.selected {
+            border-color: #303545;
+        }
+        
+        .font-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .font-option {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            background-color: #f2f3f7;
+        }
+        
+        .font-option:hover {
+            background-color: #e3e5ed;
+        }
+        
+        .font-option.selected {
+            border-color: #303545;
+            background-color: #e3e5ed;
+        }
+        
+        .animation-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .animation-option {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            background-color: #f2f3f7;
+        }
+        
+        .animation-option:hover {
+            background-color: #e3e5ed;
+        }
+        
+        .animation-option.selected {
+            border-color: #303545;
+            background-color: #e3e5ed;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s;
+        }
+
+        .slide-in {
+            animation: slideIn 0.6s;
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.6s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span style="font-size: 28px; font-weight: 700; color: #4255FF;">Quizlet</span>
+                </div>
+                <button class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Flashcards</a></li>
+                    <li><a href="#">Themes</a></li>
+                    <li><a href="#">Search</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-secondary">Log in</a>
+                    <a href="#" class="btn btn-primary">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Learn it. Own it. Quizlet.</h1>
+                    <p>Flashcards, notes, practice tests and more — all for free. Join 60 million students using Quizlet to improve their grades and reach their goals.</p>
+                    <a href="#" class="btn btn-primary">Get started</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://assets.quizlet.com/a/j/dist/app/i/homepage/misc/computers.3bdc0a3b176ce6bc.png" alt="Students learning with Quizlet">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Flashcard data
+        const flashcards = [
+            { front: "What is the capital of France?", back: "Paris" },
+            { front: "What planet is known as the Red Planet?", back: "Mars" },
+            { front: "What is the chemical symbol for gold?", back: "Au" },
+            { front: "Who wrote 'Romeo and Juliet'?", back: "William Shakespeare" },
+            { front: "What is the largest mammal?", back: "Blue Whale" }
+        ];
+
+        // Mobile navigation toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Flashcard functionality
+        const card = document.getElementById('current-card');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentCardNum = document.getElementById('current-card-num');
+        const totalCards = document.getElementById('total-cards');
+        
+        let currentIndex = 0;
+        totalCards.textContent = flashcards.length;
+        
+        // Set initial card content
+        updateCardContent();
+        
+        // Toggle card flip on click
+        card.addEventListener('click', () => {
+            card.classList.toggle('flipped');
+        });
+        
+        // Navigate to previous card
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex > 0) {
+                currentIndex--;
+                card.classList.remove('flipped');
+                updateCardContent();
+            }
+        });
+        
+        // Navigate to next card
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex < flashcards.length - 1) {
+                currentIndex++;
+                card.classList.remove('flipped');
+                updateCardContent();
+            }
+        });
+        
+        // Update card content based on current index
+        function updateCardContent() {
+            const cardFront = card.querySelector('.flashcard-front');
+            const cardBack = card.querySelector('.flashcard-back');
+            
+            cardFront.textContent = flashcards[currentIndex].front;
+            cardBack.textContent = flashcards[currentIndex].back;
+            currentCardNum.textContent = currentIndex + 1;
+        }
+
+        // Theme customization
+        const frontColorOptions = document.querySelectorAll('#front-colors .color-option');
+        const backColorOptions = document.querySelectorAll('#back-colors .color-option');
+        const patternOptions = document.querySelectorAll('#bg-patterns .pattern-option');
+        const fontOptions = document.querySelectorAll('#font-options .font-option');
+        const animationOptions = document.querySelectorAll('#animation-options .animation-option');
+        
+        const previewCard = document.getElementById('preview-card');
+        const previewFront = document.getElementById('preview-front');
+        const previewBack = document.getElementById('preview-back');
+        
+        // Front color selection
+        frontColorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                frontColorOptions.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Apply color to preview card front
+                const color = option.getAttribute('data-color');
+                previewFront.style.backgroundColor = color;
+                document.querySelectorAll('.flashcard-front').forEach(front => {
+                    front.style.backgroundColor = color;
+                });
+            });
+        });
+        
+        // Back color selection
+        backColorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                backColorOptions.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Apply color to preview card back
+                const color = option.getAttribute('data-color');
+                previewBack.style.backgroundColor = color;
+                document.querySelectorAll('.flashcard-back').forEach(back => {
+                    back.style.backgroundColor = color;
+                });
+            });
+        });
+        
+        // Pattern selection
+        patternOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                patternOptions.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Apply pattern to preview card
+                const pattern = option.getAttribute('data-pattern');
+                if (pattern === 'none') {
+                    previewFront.style.backgroundImage = 'none';
+                    previewBack.style.backgroundImage = 'none';
+                    document.querySelectorAll('.flashcard-front, .flashcard-back').forEach(el => {
+                        el.style.backgroundImage = 'none';
+                    });
+                } else {
+                    previewFront.style.backgroundImage = `url('${pattern}')`;
+                    previewBack.style.backgroundImage = `url('${pattern}')`;
+                    document.querySelectorAll('.flashcard-front, .flashcard-back').forEach(el => {
+                        el.style.backgroundImage = `url('${pattern}')`;
+                    });
+                }
+            });
+        });
+        
+        // Font selection
+        fontOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                fontOptions.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Apply font to preview card
+                const font = option.getAttribute('data-font');
+                previewFront.style.fontFamily = font;
+                previewBack.style.fontFamily = font;
+                document.querySelectorAll('.flashcard-front, .flashcard-back').forEach(el => {
+                    el.style.fontFamily = font;
+                });
+            });
+        });
+        
+        // Animation selection
+        animationOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                animationOptions.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Apply animation
+                const animation = option.getAttribute('data-animation');
+                const allCards = document.querySelectorAll('.flashcard');
+                
+                // Remove all animation classes first
+                allCards.forEach(card => {
+                    card.classList.remove('fade-in', 'slide-in', 'bounce-in');
+                    
+                    // Reset transition for default animation
+                    if (animation === 'default') {
+                        card.style.transition = 'transform 0.6s';
+                    } else {
+                        card.style.transition = 'none';
+                        card.classList.add(animation);
+                    }
+                });
+                
+                // Demo the animation on preview card
+                previewCard.classList.remove('flipped');
+                setTimeout(() => {
+                    previewCard.classList.add('flipped');
+                }, 100);
+            });
+        });
+        
+        // Click to flip preview card
+        previewCard.addEventListener('click', () => {
+            previewCard.classList.toggle('flipped');
+        });
+        
+        // Initialize preview card content
+        previewFront.textContent = "Sample Question";
+        previewBack.textContent = "Sample Answer";
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
+        
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            
+            // Simple search simulation
+            if (query.length > 2) {
+                // Show search results
+                searchResults.style.display = 'grid';
+            } else {
+                // Hide search results if query is too short
+                searchResults.style.display = 'grid';
+            }
+        });
+    </script>
+</body>
+</html>
